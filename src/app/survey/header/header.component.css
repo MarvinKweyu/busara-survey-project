@@ -1,0 +1,10 @@
+.survey-nav{
+  background: #181c20;
+  height: 50px;
+}
+
+.bi-box-arrow-right{
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
