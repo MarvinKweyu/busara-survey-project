@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SurveyService} from "../survey.service";
 
 @Component({
   selector: 'app-survey',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveyComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private surveyService: SurveyService
+  ) { }
 
   ngOnInit(): void {
+    this.surveyService.getSurvey().subscribe( (response: any) =>{
+      console.log('survey response', response)
+    })
   }
 
 }

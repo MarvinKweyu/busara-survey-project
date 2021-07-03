@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
           //     }
           console.log(loginRes);
           this.authService.saveToken(
-            loginRes
+            loginRes.key
           );
           this.authService.saveRefreshToken(
             loginRes
