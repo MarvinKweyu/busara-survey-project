@@ -5,13 +5,15 @@ import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SurveyViewComponent } from './survey/survey-view/survey-view.component';
 
 
 @NgModule({
   declarations: [
     SurveyComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    SurveyViewComponent
   ],
   imports: [
     CommonModule,
