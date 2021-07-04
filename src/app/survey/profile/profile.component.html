@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-center">
+        <img src="assets/img/placeholder.jpg" height="52px" width="52px" class="d-flex justify-content-center rounded-circle me-2" alt="...">
+      </div>
+
+      <div>
+        <p>Name: <span>{{userProfile.name}}</span></p>
+        <p>Phone: <span>{{userProfile.phone_number}}</span></p>
+        <p>Universe name: <span>{{userProfile.universe_name}}</span></p>
+
+      </div>
+      {{ userProfile | json }}
+    </div>
+  </div>
+</div>

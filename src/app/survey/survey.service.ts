@@ -9,6 +9,7 @@ import {AuthService} from "../auth/auth.service";
 export class SurveyService {
 
   busaraSurvey = environment.busara + 'api/v1/recruitment/forms/?node_type=Both'
+  busaraProfile = environment.busara + 'api/v1/users/current-user'
 
   constructor(
     private http: HttpClient,
@@ -19,8 +20,16 @@ export class SurveyService {
   getSurvey (): any{
     const myToken = localStorage.getItem('busara-token')
     const httpHeaders: HttpHeaders = new HttpHeaders({
-      Authorization: 'Bearer ' + myToken
+      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
     });
-    return this.http.get(this.busaraSurvey, this.authService.getHeaders())
+    console.log("Either There is token or not", myToken);
+    return this.http.get(this.busaraSurvey,{headers: httpHeaders})
+  }
+
+  getProfile (): any{
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
+    });
+    return this.http.get(this.busaraProfile,{headers: httpHeaders})
   }
 }

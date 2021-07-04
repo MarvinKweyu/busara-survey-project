@@ -7,6 +7,7 @@ import {SurveyService} from "../survey.service";
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
+   surveyData: any;
 
   constructor(
     private surveyService: SurveyService
@@ -15,6 +16,7 @@ export class SurveyComponent implements OnInit {
   ngOnInit(): void {
     this.surveyService.getSurvey().subscribe( (response: any) =>{
       console.log('survey response', response)
+      this.surveyData = response
     })
   }
 

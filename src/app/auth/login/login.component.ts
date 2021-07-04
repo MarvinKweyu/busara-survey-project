@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     }
 
     const loginInfo = {
-      email: this.loginForm.value.email,
+      username: this.loginForm.value.email,
       password: this.loginForm.value.password
     };
 
@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
           this.authService.saveRefreshToken(
             loginRes
           );
-          console.log('reddirecting')
           const redirectUrl = this.authService.redirectUrl;
           console.log('redirecturl ', redirectUrl)
           this.router.navigate(['survey']);

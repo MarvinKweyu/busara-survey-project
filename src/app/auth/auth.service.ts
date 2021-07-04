@@ -32,7 +32,8 @@ export class AuthService {
       client_secret: 'Zv19oWmm416sTyjWT5Sx2r1gRwjWrXU3P5dWledQpYjxEvavS58SPtz03M8wvsgajaVLhcimmJIUUYUDad06V6HQosmPoj3TPRNjg7bgniQlooIwyFWfz8KfkM5Tdh7R'
     }
     const options = { headers: this.headers};
-    const loginInfo = `grant_type=password&username=${loginData.email}&password=${loginData.password}&client_id=${clientDetail.client_id}&client_secret=${clientDetail.client_secret}`
+    const loginFormData = {...loginData, ...clientDetail, grant_type: 'password'}
+    const loginInfo = `grant_type=password&username=${loginData.username}&password=${loginData.password}&client_id=${clientDetail.client_id}&client_secret=${clientDetail.client_secret}`
     return this.http.post(this.loginUrl, loginInfo, options);
   }
 
@@ -72,7 +73,8 @@ export class AuthService {
   getHeaders(): any {
     return {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.getToken()}`
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: '*/*'
       })
     };
   }
