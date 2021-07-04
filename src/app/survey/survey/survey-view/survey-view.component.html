@@ -7,7 +7,7 @@
             <p class="card-text">{{survey.description}}</p>
           </div>
 
-          <div class="card mt-3" *ngFor="let page of survey.pages">
+          <div class="card mt-3 page-card" *ngFor="let page of survey.pages">
             <div class="card-body">
             <h3 class="card-title">{{page.name}}</h3>
             </div>
@@ -41,38 +41,38 @@
           </div>
         </div>
 
-        <div class="m-5">
-          <div>Surveys Review</div>
-          <table class="table">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Column Match</th>
-              <th scope="col">Question Type</th>
-              <th scope="col">Question Answers</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+<!--        <div class="m-5">-->
+<!--          <div>Surveys Review</div>-->
+<!--          <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--              <th scope="col">#</th>-->
+<!--              <th scope="col">Column Match</th>-->
+<!--              <th scope="col">Question Type</th>-->
+<!--              <th scope="col">Question Answers</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--              <th scope="row">1</th>-->
+<!--              <td>Mark</td>-->
+<!--              <td>Otto</td>-->
+<!--              <td>@mdo</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <th scope="row">2</th>-->
+<!--              <td>Jacob</td>-->
+<!--              <td>Thornton</td>-->
+<!--              <td>@fat</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <th scope="row">3</th>-->
+<!--              <td colspan="2">Larry the Bird</td>-->
+<!--              <td>@twitter</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
 
         <button class="btn btn-primary" (click)="submitForm()">submit</button>
       </div>

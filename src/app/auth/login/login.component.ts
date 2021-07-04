@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           );
           const redirectUrl = this.authService.redirectUrl;
           console.log('redirecturl ', redirectUrl)
-          this.router.navigate(['survey']);
+          this.router.navigate(['survey/view']);
         },
         (loginErr: any) => {
           this.loginError = true;

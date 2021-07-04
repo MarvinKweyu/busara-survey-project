@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import {HttpClientModule} from "@angular/common/http";
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        BrowserAnimationsModule, // required animations module
+        ToastrModule.forRoot(),
     ],
   providers: [],
   bootstrap: [AppComponent]
