@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SurveyService} from "../../survey.service";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {NotificationService} from "../../../shared/notification.service";
 
 @Component({
   selector: 'app-survey-view',
@@ -17,7 +18,8 @@ export class SurveyViewComponent implements OnInit {
 
   constructor(
     private surveyService: SurveyService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,16 @@ export class SurveyViewComponent implements OnInit {
     const userResponse = [surveyResponseData];
 
     this.surveyService.submitSurvey(userResponse).subscribe(response =>{
-      console.log('response submission', response)
+      // {
+      //   "message": "details saved successfully"
+      // }
+      // console.log('response submission', response)
+      // @ts-ignore
+      if(response.message === 'details saved successfully'){
+        this.notificationService.showSuccess('Survey filled successfully', 'Survey filled')
+      }else{
+        this.notificationService.showError('Could not submit survey at this time', 'Failed to submit form')
+      }
     })
 
 
@@ -62,7 +73,7 @@ export class SurveyViewComponent implements OnInit {
 
   inputData(event: any, question: any) {
     const formData = {
-      column_data: question.column_match,
+      column_match: question.column_match,
       q_ans: event.target.value,
       q_id: question.id
     }
@@ -72,9 +83,11 @@ export class SurveyViewComponent implements OnInit {
   }
 
   surveyOptionSelect(option: any, question: any) {
+    // find id of option in question
+    const option_id = question.q_options.find((q_option: { name: any; }) => q_option.name ===  option.value)
     const formData = {
-      column_data: question.column_match,
-      q_ans: Number(option.value),
+      column_match: question.column_match,
+      q_ans: option_id.id,
       q_id: question.id
     }
     this.updateAnswers(formData);

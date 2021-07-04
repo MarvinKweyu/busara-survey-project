@@ -19,25 +19,18 @@ export class SurveyService {
 
 
   getSurvey (): any{
-    const myToken = localStorage.getItem('busara-token')
     const httpHeaders: HttpHeaders = new HttpHeaders({
-      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
+      Authorization: `Bearer HERfHpjCqUqKd22IwmA5F759ytnZMS`
     });
-    console.log("Either There is token or not", myToken);
-    return this.http.get(this.busaraSurvey,{headers: httpHeaders})
+    return this.http.get(this.busaraSurvey,this.authService.getHeaders())
   }
 
   getProfile (): any{
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
-    });
-    return this.http.get(this.busaraProfile,{headers: httpHeaders})
+    return this.http.get(this.busaraProfile,this.authService.getHeaders())
   }
 
   submitSurvey(surveyData: any){
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
-    });
-    return this.http.post(this.busaraSurveyAnswers, surveyData,{headers: httpHeaders})
+    console.log('data submitting', surveyData);
+    return this.http.post(this.busaraSurveyAnswers, surveyData,this.authService.getHeaders())
   }
 }
