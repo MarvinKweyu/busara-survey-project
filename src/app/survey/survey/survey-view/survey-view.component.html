@@ -32,7 +32,7 @@
 
                             <div class="col-md-4" *ngIf="question.type === 'select'">
                               <label for="inputState" class="form-label">{{question.column_match}}</label>
-                              <select id="inputState" class="form-select">
+                              <select id="inputState" class="form-select" (change)="surveyOptionSelect($event.target, question)">
                                 <option selected>Choose...</option>
                                 <option *ngFor="let item of question.q_options">{{item.name}}</option>
                               </select>
@@ -50,7 +50,7 @@
             <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Column_Match</th>
+              <th scope="col">Column Match</th>
               <th scope="col">Question Type</th>
               <th scope="col">Question Answers</th>
             </tr>

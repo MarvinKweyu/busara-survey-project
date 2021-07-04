@@ -10,9 +10,9 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 export class SurveyViewComponent implements OnInit {
   surveyForms: any;
   questionAnswers = Array();
+  surveyAnswers = [];
+  startingTime: any;
 
-  valuesString = '';
-  valuesArray = Array();
 
   constructor(
     private surveyService: SurveyService,
@@ -28,12 +28,28 @@ export class SurveyViewComponent implements OnInit {
 
   goToSurvey(survey: any) {
     console.log('survey name', survey.name)
+
   }
 
 
 
   submitForm() {
     console.log('form data',this.questionAnswers);
+    const surveyResponseData = {
+      "ans": this.questionAnswers,
+      "end_time": "2021-02-03 11:35:16.649 +0300",
+      "local_id": 0,
+      "location": {
+        "accuracy": 0,
+        "lat": 0,
+        "lon": 0
+      },
+      "start_time": "2021-02-03 11:27:37.739 +0300",
+      "survey_id": "<SurveyID-Retrieve this from the FORM Data>"
+
+    }
+
+
   }
 
 
@@ -43,13 +59,29 @@ export class SurveyViewComponent implements OnInit {
       q_ans: event.target.value,
       q_id: question.id
     }
-    const existence = this.questionAnswers.findIndex(answer => answer.q_id === formData.q_id)
+
+    this.updateAnswers(formData);
+
+  }
+
+  surveyOptionSelect(option: any, question: any) {
+    const formData = {
+      column_data: question.column_match,
+      q_ans: option.value,
+      q_id: question.id
+    }
+    this.updateAnswers(formData);
+
+  }
+
+  private updateAnswers(formInfo: any): void {
+    const existence = this.questionAnswers.findIndex(answer => answer.q_id === formInfo.q_id)
     if(existence >= 0){
-    //  item exists already. Adjust q ans if changed
+      //  item exists already. Adjust q ans if changed
       //Update object's answer property property.
-      this.questionAnswers[existence].q_ans = formData.q_ans
+      this.questionAnswers[existence].q_ans = formInfo.q_ans
     }else{
-      this.questionAnswers.push(formData)
+      this.questionAnswers.push(formInfo)
     }
   }
 }

@@ -10,6 +10,7 @@ export class SurveyService {
 
   busaraSurvey = environment.busara + 'api/v1/recruitment/forms/?node_type=Both'
   busaraProfile = environment.busara + 'api/v1/users/current-user'
+  busaraSurveyAnswers = environment.busara + 'api/v1/recruitment/answers/submit/'
 
   constructor(
     private http: HttpClient,
@@ -31,5 +32,12 @@ export class SurveyService {
       Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
     });
     return this.http.get(this.busaraProfile,{headers: httpHeaders})
+  }
+
+  submitSurvey(surveyData: any){
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: `Bearer FROFwLZMov1pH4yhjphHqGQx4tbB3L`
+    });
+    return this.http.post(this.busaraSurveyAnswers, surveyData,{headers: httpHeaders})
   }
 }
