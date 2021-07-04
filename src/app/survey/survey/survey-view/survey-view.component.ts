@@ -12,6 +12,7 @@ export class SurveyViewComponent implements OnInit {
   questionAnswers = Array();
   surveyAnswers = [];
   startingTime: any;
+  private surveyId: any;
 
 
   constructor(
@@ -28,13 +29,13 @@ export class SurveyViewComponent implements OnInit {
 
   goToSurvey(survey: any) {
     console.log('survey name', survey.name)
+    this.surveyId = survey.id;
 
   }
 
 
 
   submitForm() {
-    console.log('form data',this.questionAnswers);
     const surveyResponseData = {
       "ans": this.questionAnswers,
       "end_time": "2021-02-03 11:35:16.649 +0300",
@@ -45,9 +46,15 @@ export class SurveyViewComponent implements OnInit {
         "lon": 0
       },
       "start_time": "2021-02-03 11:27:37.739 +0300",
-      "survey_id": "<SurveyID-Retrieve this from the FORM Data>"
+      "survey_id": this.surveyId
 
     }
+
+    const userResponse = [surveyResponseData];
+
+    this.surveyService.submitSurvey(userResponse).subscribe(response =>{
+      console.log('response submission', response)
+    })
 
 
   }
@@ -67,7 +74,7 @@ export class SurveyViewComponent implements OnInit {
   surveyOptionSelect(option: any, question: any) {
     const formData = {
       column_data: question.column_match,
-      q_ans: option.value,
+      q_ans: Number(option.value),
       q_id: question.id
     }
     this.updateAnswers(formData);
