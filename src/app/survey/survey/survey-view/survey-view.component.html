@@ -22,17 +22,17 @@
                     <div >
                             <div class="col-md-6" *ngIf="question.type === 'text'">
                               <label for="inputEmail4" class="form-label">{{question.text}}</label>
-                              <input [(ngModel)]="valuesString" [ngModelOptions]="{standalone: true}" placeholder="Item name" type="text" class="form-control shadow-none" id="inputEmail4">
+                              <input (keyup)="inputData($event, question)" placeholder="Item name" type="text" class="form-control shadow-none" id="inputEmail4">
                             </div>
 
                             <div class="col-md-6" *ngIf="question.type === 'tel'">
                               <label for="inputEmail4" class="form-label">{{question.text}}</label>
-                              <input [(ngModel)]="valuesString" [ngModelOptions]="{standalone: true}" type="tel" class="form-control shadow-none" id="inputEmail5">
+                              <input (keyup)="inputData($event, question)"  type="tel" class="form-control shadow-none" id="inputEmail5">
                             </div>
 
                             <div class="col-md-4" *ngIf="question.type === 'select'">
                               <label for="inputState" class="form-label">{{question.column_match}}</label>
-                              <select id="inputState" class="form-select" [formControlName]="question.column_match">
+                              <select id="inputState" class="form-select">
                                 <option selected>Choose...</option>
                                 <option *ngFor="let item of question.q_options">{{item.name}}</option>
                               </select>

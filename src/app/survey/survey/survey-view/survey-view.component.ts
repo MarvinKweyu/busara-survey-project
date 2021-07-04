@@ -9,7 +9,7 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 })
 export class SurveyViewComponent implements OnInit {
   surveyForms: any;
-  questions = Array();
+  questionAnswers = Array();
 
   valuesString = '';
   valuesArray = Array();
@@ -22,23 +22,6 @@ export class SurveyViewComponent implements OnInit {
   ngOnInit(): void {
     this.surveyService.getSurvey().subscribe( (response: any) =>{
       this.surveyForms = response.forms
-      const questions = Array();
-      console.log('pages', response.forms);
-      // @ts-ignore
-      response.forms.forEach(formData =>{
-        console.log('form data', formData.pages);
-        // @ts-ignore
-        formData.pages.sections.forEach(question =>{
-          const data = {
-            column_match: question.column_match,
-            id: question.id,
-            type: question.type
-          }
-          questions.push(data)
-        })
-      })
-
-      console.log('madness', questions);
     })
   }
 
@@ -50,13 +33,23 @@ export class SurveyViewComponent implements OnInit {
 
 
   submitForm() {
-    const valuesStr = this.valuesString.split(" "); //split based on ' ' and store on a variable
-    this.valuesArray = valuesStr.map(x => parseInt(x)); //convert each item to int
-
-    //perform your computation
-    const results = this.valuesArray[0] - this.valuesArray[1];
-    console.log(results);
+    console.log('form data',this.questionAnswers);
   }
 
 
+  inputData(event: any, question: any) {
+    const formData = {
+      column_data: question.column_match,
+      q_ans: event.target.value,
+      q_id: question.id
+    }
+    const existence = this.questionAnswers.findIndex(answer => answer.q_id === formData.q_id)
+    if(existence >= 0){
+    //  item exists already. Adjust q ans if changed
+      //Update object's answer property property.
+      this.questionAnswers[existence].q_ans = formData.q_ans
+    }else{
+      this.questionAnswers.push(formData)
+    }
+  }
 }
