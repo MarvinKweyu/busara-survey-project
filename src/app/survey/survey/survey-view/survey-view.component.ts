@@ -7,7 +7,7 @@ import {SurveyService} from "../../survey.service";
   styleUrls: ['./survey-view.component.css']
 })
 export class SurveyViewComponent implements OnInit {
-  surveyData: any;
+  surveyForms: any;
 
   constructor(
     private surveyService: SurveyService
@@ -15,9 +15,15 @@ export class SurveyViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.surveyService.getSurvey().subscribe( (response: any) =>{
-      console.log('survey response', response)
-      this.surveyData = response
+      this.surveyForms = response.forms
     })
   }
 
+  goToSurvey(survey: any) {
+    console.log('survey name', survey.name)
+  }
+
+  submitForm() {
+
+  }
 }

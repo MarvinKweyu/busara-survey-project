@@ -1,5 +1,43 @@
 <div class="container">
-  <div>
-    {{ surveyData | json}}
-  </div>
+  <div class="card main-card">
+      <div *ngFor="let survey of surveyForms" class="card" (click)="goToSurvey(survey)">
+        <div class="card-body">
+          <h5 class="card-title">{{survey.name}}</h5>
+          <p class="card-text">{{survey.description}}</p>
+
+          <div class="card" *ngFor="let page of survey.pages">
+            <div class="card-body">
+            <h3 class="card-title">{{page.name}}</h3>
+            </div>
+
+            <div class="card" *ngFor="let section of page.sections">
+              <h3 class="card-title">{{section.name}}</h3>
+              <div class="card-body">
+                <p>{{section.description}}</p>
+              </div>
+
+
+              <div *ngFor="let question of section.questions">
+                <form class="row g-3">
+                  <div class="col-md-6" *ngIf="question.type === 'text'">
+                    <label for="inputEmail4" class="form-label">{{question.text}}</label>
+                    <input type="text" class="form-control shadow-none" id="inputEmail4">
+                  </div>
+
+                  <div class="col-md-4" *ngIf="question.type === 'select'">
+                    <label for="inputState" class="form-label">{{question.column_match}}</label>
+                    <select id="inputState" class="form-select">
+                      <option selected>Choose...</option>
+                      <option *ngFor="let item of question.q_options">{{item.name}}</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" (click)="submitForm()">submit</button>
+      </div>
+    </div>
 </div>
