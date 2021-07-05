@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {BROWSER_STORAGE} from "./storage";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,11 @@ export class AuthService {
     }
     const options = { headers: this.headers};
     const loginInfo = `grant_type=password&username=${loginData.username}&password=${loginData.password}&client_id=${clientDetail.client_id}&client_secret=${clientDetail.client_secret}`
-    return this.http.post(this.loginUrl, loginInfo, options);
+    return this.http.post(this.loginUrl, loginInfo, options).pipe(
+      tap(
+          (res) => console.log('login service',res),
+        //   (err) => console.log(err)
+      ));
   }
 
   logout(): any {
@@ -72,7 +77,7 @@ export class AuthService {
   getHeaders(): any {
     return {
       headers: new HttpHeaders({
-        Authorization: `Bearer HERfHpjCqUqKd22IwmA5F759ytnZMS`,
+        Authorization: `Bearer ekZUpjvGhHGZRZPlQoCiDxf2OBccJj`,
         Accept: '*/*'
       })
     };

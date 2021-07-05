@@ -1,0 +1,45 @@
+<div class="container">
+
+  <i class="d-flex justify-content-start bi bi-arrow-left-circle mt-3" title="Back to All forms" (click)="showAllForms()"></i>
+  <div class="d-flex justify-content-center">
+    <h3>{{ currentForm.name }}</h3>
+  </div>
+
+  <div class="card mt-3 page-card" *ngFor="let page of currentForm.pages">
+    <div class="card-body">
+      <h3 class="card-title">{{page.name}}</h3>
+    </div>
+
+    <div class="card" *ngFor="let section of page.sections">
+
+      <div *ngFor="let question of section.questions">
+        <form class="row g-3 mx-3 my-auto" >
+          <div >
+            <div class="col-md-6" *ngIf="question.type === 'text'">
+              <label [for]="question.text" class="form-label">{{question.text}}</label>
+              <input [name]="question.text" (blur)="onBlur(section, page, question)" (keyup)="inputData($event, question)" [placeholder]="question.text" [required]="question.is_mandatory" type="text" class="form-control shadow-none" id="inputEmail4">
+              <span *ngIf="question.showError" class="text-danger">{{question.error_message}}</span>
+            </div>
+
+            <div class="col-md-6" *ngIf="question.type === 'tel'">
+              <label [for]="question.text" class="form-label">{{question.text}}</label>
+              <input [name]="question.text" (keyup)="inputData($event, question)" [required]="question.is_mandatory" type="tel" class="form-control shadow-none" id="inputEmail5">
+              <span *ngIf="question.showError" class="text-danger">{{question.error_message}}</span>
+            </div>
+
+            <div class="col-md-4" *ngIf="question.type === 'select'">
+              <label for="inputState" class="form-label">{{question.column_match}}</label>
+              <select id="inputState" class="form-select shadow-none" (change)="surveyOptionSelect($event.target, question)" [required]="question.is_mandatory">
+                <option selected>Choose...</option>
+                <option *ngFor="let item of question.q_options">{{item.name}}</option>
+              </select>
+              <span *ngIf="question.showError" class="text-danger">{{question.error_message}}</span>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <button class="btn btn-primary my-2 d-flex justify-content-end shadow-none submit-survey-btn" (click)="submitForm()">submit</button>
+</div>

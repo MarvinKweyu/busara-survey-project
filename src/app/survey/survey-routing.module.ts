@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {SurveyComponent} from "./survey/survey.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {SurveyViewComponent} from "./survey/survey-view/survey-view.component";
+import {SurveyDetailComponent} from "./survey/survey-detail/survey-detail.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'view',
         component: SurveyViewComponent
+      },
+      {
+        path: 'detail/:id',
+        component: SurveyDetailComponent
       },
       {
         path: 'profile',
