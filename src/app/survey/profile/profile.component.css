@@ -4,3 +4,16 @@
   place-content: center;
   margin-top: 10%;
 }
+
+.profile-card{
+  width: 40vw;
+  height: 40vh;
+}
+.btn-primary{
+  background-color: #6CB4EE !important;
+}
+
+.profile-card{
+  box-shadow: 0 16px 40px 1px rgba(112, 144, 176, 0.2);
+  border-radius: 10px;
+}

@@ -1,12 +1,15 @@
 <div class="main-login-section">
   <div class="sign-in-container">
     <div class="sign-in-content">
-      <div class="sign-in-title">
-        <p>Sign In</p>
+      <div>
+        <div class="sign-in-title text-center">
+          <p>Sign In</p>
+        </div>
+        <div class="sign-in-description text-center">
+          <p>Sign in to your Busara account.</p>
+        </div>
       </div>
-      <div class="sign-in-description">
-        <p>Sign in to your Busara account.</p>
-      </div>
+
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="sign-in-form">
         <div class="username-details">
           <label for="userName">Username</label>
