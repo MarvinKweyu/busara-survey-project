@@ -5,3 +5,12 @@
 .btn-primary{
   background-color:#6CB4EE !important;
 }
+
+.form-detail-container{
+  /*height: 90vh;*/
+  /*overflow-y: auto;*/
+}
+.loading{
+  display: grid;
+  place-items: center;
+}

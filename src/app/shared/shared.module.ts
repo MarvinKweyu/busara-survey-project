@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationComponent } from './notification/notification.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
 @NgModule({
-  declarations: [
-    NotificationComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+    declarations: [
+        LoadingComponent
+    ],
+    exports: [
+        LoadingComponent
+    ],
+    imports: [
+        CommonModule
+    ]
 })
 export class SharedModule { }

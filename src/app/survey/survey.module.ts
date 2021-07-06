@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SurveyViewComponent } from './survey/survey-view/survey-view.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SurveyDetailComponent } from './survey/survey-detail/survey-detail.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -18,11 +19,12 @@ import { SurveyDetailComponent } from './survey/survey-detail/survey-detail.comp
     SurveyViewComponent,
     SurveyDetailComponent
   ],
-  imports: [
-    CommonModule,
-    SurveyRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        SurveyRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        SharedModule
+    ]
 })
 export class SurveyModule { }
