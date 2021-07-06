@@ -48,16 +48,18 @@ export class LoginComponent implements OnInit {
           //   "permissions": [<A list of user permissions>],
           //   "access_token": "<your_access_token>"
           //     }
-          console.log(loginRes);
+
           this.authService.saveToken(
-            loginRes.key
+            loginRes.access_token
           );
           this.authService.saveRefreshToken(
-            loginRes
+            loginRes.refresh_token
+          );
+          this.authService.saveExpirationTime(
+            loginRes.expires_in
           );
           const redirectUrl = this.authService.redirectUrl;
-          console.log('redirecturl ', redirectUrl)
-          this.router.navigate(['survey/view']);
+          this.router.navigate([redirectUrl]);
         },
         (loginErr: any) => {
           this.loginError = true;
