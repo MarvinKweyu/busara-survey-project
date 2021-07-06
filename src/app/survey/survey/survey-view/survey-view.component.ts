@@ -28,9 +28,11 @@ export class SurveyViewComponent implements OnInit {
   ngOnInit(): void {
     this.surveyService.getSurvey().subscribe( (response: any) =>{
       this.surveyForms = response.forms
-    })
-
-    // this.createFormControls();
+    },
+      // @ts-ignore
+      (error) =>{
+      this.notificationService.showError('Could not display survey forms at this time','Unable to get forms')
+      })
   }
 
 

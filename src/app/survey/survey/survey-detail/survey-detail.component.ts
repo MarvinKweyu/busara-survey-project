@@ -34,6 +34,9 @@ export class SurveyDetailComponent implements OnInit {
   private getTargetForm(id: any) {
     this.surveyService.getSurvey().subscribe( (response: any) =>{
       this.currentForm = response.forms.find((formItem: { id: number; }) => formItem.id === Number(id));
+      if(!this.currentForm){
+        this.notificationService.showError('Unable to get this form at this time','Could not retrieve this survey')
+      }
     })
   }
 

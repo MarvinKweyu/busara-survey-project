@@ -22,4 +22,8 @@
   color: #7CB9E8;
 }
 
+.loading{
+  display: grid;
+  place-items: center;
+}
 

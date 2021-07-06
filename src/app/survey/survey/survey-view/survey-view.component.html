@@ -1,6 +1,8 @@
 <div class="container">
   <h2 class="d-flex justify-content-center">Busara Surveys</h2>
   <div class="main-card">
+    <app-loading *ngIf="!surveyForms" class="d-flex justify-content-center loading"></app-loading>
+    <div *ngIf="surveyForms">
       <div *ngFor="let survey of surveyForms" class="card form-card mb-3" (click)="goToSurvey(survey)">
         <div class="card-body">
 
@@ -13,5 +15,7 @@
 
         </div>
       </div>
+      </div>
     </div>
+
 </div>
