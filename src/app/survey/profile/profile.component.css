@@ -7,7 +7,7 @@
 
 .profile-card{
   max-width: 550px;
-  height: 40vh;
+  /*height: 40vh;*/
 }
 .btn-primary{
   background-color: #6CB4EE !important;
