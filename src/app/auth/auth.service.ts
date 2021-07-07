@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {BROWSER_STORAGE} from "./storage";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,9 @@ export class AuthService {
   loginUrl = environment.busara + 'api/v1/oauth/token/';
   redirectUrl = 'survey/view';
   logoutUrl = environment.busara + 'api/v1/auth/logout/';
+
+  loginError = false;
+  loginServerError = '';
 
   private headers = new HttpHeaders(
     {
@@ -31,7 +35,14 @@ export class AuthService {
     }
     const options = { headers: this.headers};
     const loginInfo = `grant_type=password&username=${loginData.username}&password=${loginData.password}&client_id=${clientDetail.client_id}&client_secret=${clientDetail.client_secret}`
-    return this.http.post(this.loginUrl, loginInfo, options);
+    return this.http.post(this.loginUrl, loginInfo, options)
+      .pipe(
+      catchError(async (error) => {
+        // for errors not coming in as a response
+        this.loginError = true;
+        this.loginServerError = 'Invalid login credentials. Please try again.';
+      })
+    );
   }
 
   logout(): any {

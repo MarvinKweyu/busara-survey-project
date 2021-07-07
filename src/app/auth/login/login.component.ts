@@ -10,7 +10,6 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  loginError = false;
   loginServerError = '';
   emptyForm = false;
 
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) { }
 
@@ -62,13 +61,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate([redirectUrl]);
         },
         (loginErr: any) => {
-          this.loginError = true;
-          console.log(loginErr);
-          if (loginErr.error[0].non_field_errors[0] === 'Invalid login credentials') {
-            this.loginServerError = 'Invalid login credentials. Please try again.';
-          } else if (loginErr.error[0].non_field_errors[0] === 'Unable to login with provided credentials') {
-            this.loginServerError = 'A user with the provided credentials does not exist.';
-          }
+          this.authService.loginError = true;
+          this.authService.loginServerError = 'Invalid login credentials. Please try again.';
         }
       );
   }

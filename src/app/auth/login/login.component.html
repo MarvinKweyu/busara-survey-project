@@ -28,7 +28,7 @@
           <button class="sign-in-form-btn" type="submit" (click)="isSubmitted()" [disabled]="loginForm.invalid">Sign in</button>
         </div>
         <div class="login-error">
-          <span *ngIf="loginError">{{loginServerError}}</span>
+          <span *ngIf="authService.loginError">{{authService.loginServerError}}</span>
         </div>
       </form>
     </div>

@@ -17,7 +17,8 @@ export class SurveyService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) { }
 
 
@@ -31,8 +32,11 @@ export class SurveyService {
 
   submitSurvey(surveyData: any){
     return this.http.post(this.busaraSurveyAnswers, surveyData,this.authService.getHeaders())
+      // * NOTE: backend needs a better response on incorrect inputs
       .pipe(
-        catchError(this.handleError)
+        catchError(async (error) => {
+          this.notificationService.showError(`${error.error.errors[0].errors[0]}`, `Unable to submit the survey. Error ${error.status}`)
+        })
       );
   }
 
