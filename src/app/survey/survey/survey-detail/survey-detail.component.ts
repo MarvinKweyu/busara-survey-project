@@ -63,7 +63,6 @@ export class SurveyDetailComponent implements OnInit {
       // {
       //   "message": "details saved successfully"
       // }
-      // console.log('response submission', response)
       // @ts-ignore
       if(response.message === 'details saved successfully'){
         this.notificationService.showSuccess('Survey filled successfully', 'Survey filled')
@@ -123,17 +122,25 @@ export class SurveyDetailComponent implements OnInit {
       //  item exists already. Check the field q_ans if empty and show error
       // update question to have showError: true
       if (!existence.q_ans){
-        console.log('item exists but has no ans')
+        // console.log('item exists but has no ans')
         question.showError = true;
       }else{
         question.showError = false;
+        // if input is phone number, check against accepted phone numbers
+        if(question.type === 'tel'){
+          question.showError = !this.isValidPhoneNumber(existence.q_ans);
+        }
       }
       this.change.detectChanges();
     }else{
-      console.log('item does not exist yet user has left field.Add error')
+      // console.log('item does not exist yet user has left field.Add error')
      // item does not exist
       question.showError = true;
     }
     this.change.detectChanges();
+  }
+
+   isValidPhoneNumber(value: string) {
+    return (/^\d{7,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
   }
 }

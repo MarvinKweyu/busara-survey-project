@@ -26,11 +26,11 @@
 
               <div class="col-md-6" *ngIf="question.type === 'tel'">
                 <label [for]="question.text" class="form-label">{{question.text}}</label>
-                <input [name]="question.text" (keyup)="inputData($event, question)" [required]="question.is_mandatory" type="tel" class="form-control shadow-none" id="inputEmail5">
+                <input [name]="question.text" (blur)="onBlur(section, page, question)" (keyup)="inputData($event, question)" [required]="question.is_mandatory" type="tel" class="form-control shadow-none" id="inputEmail5">
                 <span *ngIf="question.showError" class="text-danger">{{question.error_message}}</span>
               </div>
 
-              <div class="col-md-4" *ngIf="question.type === 'select'">
+              <div class="col-md-4 mb-2" *ngIf="question.type === 'select'">
                 <label for="inputState" class="form-label">{{question.column_match}}</label>
                 <select id="inputState" class="form-select shadow-none" (change)="surveyOptionSelect($event.target, question)" [required]="question.is_mandatory">
                   <option selected>Choose...</option>

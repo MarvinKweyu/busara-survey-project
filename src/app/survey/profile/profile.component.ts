@@ -8,7 +8,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userProfile: any;
+  userProfile = {
+    name: '',
+    email: '',
+    phone_number: '',
+    language: '',
+    universe_name: ''
+  };
 
   constructor(
     private surveyService: SurveyService,
