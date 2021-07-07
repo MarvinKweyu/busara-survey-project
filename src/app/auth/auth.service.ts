@@ -61,15 +61,16 @@ export class AuthService {
   }
 
   saveExpirationTime(expiresIn: number): any{
-    this.storage.setItem('busara-token-expiration', String(expiresIn));
+    // add to current date, the expiratin time
+    const timeOfDep = new Date().getTime() + (expiresIn * 1000);
+    this.storage.setItem('busara-token-expiration', String(timeOfDep));
   }
 
   isLoggedIn(): boolean {
     const token: string = this.getToken();
     if (token) {
-      // const payload = JSON.parse(atob(token.split('.')[1]));
-      // return payload.exp > (Date.now() / 1000);
-      return true
+      const expiration = this.getTokenExpirationTime();
+      return expiration > Date.now()
     } else {
       return false;
     }
