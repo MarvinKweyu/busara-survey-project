@@ -71,8 +71,8 @@ export class AuthService {
     if (token) {
       const expiration = this.getTokenExpirationTime();
       return expiration > Date.now()
-    } else {
-      return false;
+    }else{
+      return false
     }
   }
 

@@ -2,13 +2,15 @@
 
 > A survey application
 
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=busara-survey-project)
+
 ### Live application:
 
 https://busara-survey-project.vercel.app/
 
-### Project board
+## Project board
 
-Look up [BusaraSurveyProject board](https://github.com/MarvinKweyu/busara-survey-project/projects/1)
+Look up [BusaraSurveyProject board](https://github.com/MarvinKweyu/busara-survey-project/projects/1) for the project
 
 ## Development server
 
