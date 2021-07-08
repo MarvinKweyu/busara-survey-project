@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: '',
     component: SurveyComponent ,
-    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'view',

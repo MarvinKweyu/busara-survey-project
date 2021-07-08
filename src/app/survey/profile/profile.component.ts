@@ -20,9 +20,13 @@ export class ProfileComponent implements OnInit {
   constructor(
     private surveyService: SurveyService,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    if (!this.authService.tokenValid()) {
+      this.authService.logout();
+    }
     this.surveyService.getProfile().subscribe((profile: any) =>{
       this.userProfile = profile
     })

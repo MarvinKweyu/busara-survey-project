@@ -23,7 +23,8 @@ export class SurveyViewComponent implements OnInit {
     private surveyService: SurveyService,
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class SurveyViewComponent implements OnInit {
       (error) =>{
       this.notificationService.showError('Could not display survey forms at this time','Unable to get forms')
       })
+    if (!this.authService.tokenValid()) {
+      this.authService.logout();
+    }
   }
 
 

@@ -26,8 +26,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const url: string = state.url;
-    return this.checkLogin(url);
+    return true;
   }
   canDeactivate(
     component: unknown,
@@ -44,12 +43,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
 
   checkLogin(url: string): true|UrlTree {
     if (this.authService.isLoggedIn()) {
-      // user is logged in when navigating this route, but is the token still valid given the time expiration?
-      if (!this.authService.tokenValid()) {
-        this.authService.logout();
-      }else {
-        return true;
-      }
+      return true;
     }
     this.authService.redirectUrl = url;
     // go back to login
