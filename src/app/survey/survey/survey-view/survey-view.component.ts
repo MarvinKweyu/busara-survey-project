@@ -3,6 +3,7 @@ import {SurveyService} from "../../survey.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from "../../../shared/notification.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-survey-view',

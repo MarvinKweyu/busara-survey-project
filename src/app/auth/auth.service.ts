@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {BROWSER_STORAGE} from "./storage";
 import {catchError} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import {catchError} from "rxjs/operators";
 export class AuthService {
   loginUrl = environment.busara + 'api/v1/oauth/token/';
   redirectUrl = 'survey/view';
-  logoutUrl = environment.busara + 'api/v1/auth/logout/';
+  // ? logoutUrl = environment.busara + 'api/v1/auth/logout/';
+  // * set a future refresh token URL to get upon token expiration. Unavailable
 
   loginError = false;
   loginServerError = '';
@@ -24,6 +26,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
@@ -46,9 +49,11 @@ export class AuthService {
   }
 
   logout(): any {
-    this.http.get(this.logoutUrl);
+    // this.http.get(this.logoutUrl);
     this.storage.removeItem('busara-token');
     this.storage.removeItem('busara-refresh-token');
+    this.router.navigate(['/']);
+
   }
 
   getToken(): any {
@@ -84,6 +89,17 @@ export class AuthService {
       return expiration > Date.now()
     }else{
       return false
+    }
+  }
+
+  tokenValid(): boolean {
+    const expiration = this.getTokenExpirationTime();
+
+    if (this.isLoggedIn()) {
+      // console.log('current time is greater than expiration', Date.now() > expiration + Date.now())
+      return Date.now() > expiration;
+    } else {
+      return false;
     }
   }
 
