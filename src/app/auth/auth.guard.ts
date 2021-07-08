@@ -26,7 +26,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    const url: string = state.url;
+    return this.checkLogin(url);
   }
   canDeactivate(
     component: unknown,
@@ -42,8 +43,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   }
 
   checkLogin(url: string): true|UrlTree {
+    // only authorized users can view this route
     if (this.authService.isLoggedIn()) {
-      return true;
+      // user is logged in on this route, but is the token still valid?
+      if (!this.authService.tokenValid()) {
+        this.authService.logout();
+      }else{
+        return true;
+      }
     }
     this.authService.redirectUrl = url;
     // go back to login

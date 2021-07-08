@@ -52,6 +52,7 @@ export class AuthService {
     // this.http.get(this.logoutUrl);
     this.storage.removeItem('busara-token');
     this.storage.removeItem('busara-refresh-token');
+    this.storage.removeItem('busara-token-expiration');
     this.router.navigate(['/']);
 
   }
@@ -77,8 +78,8 @@ export class AuthService {
   }
 
   saveExpirationTime(expiresIn: number): any{
-    // add to current date, the expiratin time
-    const timeOfDep = new Date().getTime() + (expiresIn * 1000);
+    // add to current date, the expiration time
+    const timeOfDep = Date.now() + (expiresIn * 1000);
     this.storage.setItem('busara-token-expiration', String(timeOfDep));
   }
 
@@ -96,8 +97,8 @@ export class AuthService {
     const expiration = this.getTokenExpirationTime();
 
     if (this.isLoggedIn()) {
-      // console.log('current time is greater than expiration', Date.now() > expiration + Date.now())
-      return Date.now() > expiration;
+      // console.log('current time is greater than expiration', expiration > Date.now())
+      return expiration > Date.now();
     } else {
       return false;
     }

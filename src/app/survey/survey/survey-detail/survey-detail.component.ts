@@ -23,14 +23,10 @@ export class SurveyDetailComponent implements OnInit {
     private notificationService: NotificationService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private change: ChangeDetectorRef,
-    private authService: AuthService
+    private change: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    if (!this.authService.tokenValid()) {
-      this.authService.logout();
-    }
     this.activatedRoute.params.subscribe(params => {
         this.getTargetForm(params.id)
     })
